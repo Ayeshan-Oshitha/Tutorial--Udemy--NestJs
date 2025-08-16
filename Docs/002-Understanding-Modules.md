@@ -45,3 +45,7 @@ The `@Module` decorator makes a file the entry point of a module (not the naming
 _(Extra: Naming conventions such as `.module.ts`, `.controller.ts`, etc., are mainly for developers’ readability. The file is actually recognized and controlled by the decorator, not by the file name.)_
 
 Every other module created inside a NestJS application must be imported into **app.module.ts**. These imports bring together the rest of the modules into the main application.
+
+# Creating a New User Module
+
+`nest generate module users` - Generates a new module named "users" with a users.module.ts file
