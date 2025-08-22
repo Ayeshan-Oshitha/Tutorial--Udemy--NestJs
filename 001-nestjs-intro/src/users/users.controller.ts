@@ -10,23 +10,28 @@ import {
 
 @Controller('users')
 export class UsersController {
-  @Get()
-  public getUsers() {
-    return 'Return all users';
-  }
+  /**
+   *  Final Endpoint - /users/id?limit=10&page=1
+   * Param id - optional, convert to integer, cannot have a default value
+   * Query limit - optional, convert to integer, default value is 10
+   * Query page - optional, convert to integer, default value is 1
+   *  ==> USE CASES
+   * /users/ -> returns all users with default pagination
+   * /users/1223 -> returns one users whos id is 1223
+   * users?limit=5&page=2 returns page 2 with limit of pagination 5
+   */
 
-  @Get('/:id/{:name}')
-  public getUser(@Param() params: any) {
-    return `Return a user - ${params.id} - ${params.name} `;
+  @Get('/:id')
+  public getUsers(
+    @Param('id') id: any,
+    @Query('limit') limit: any,
+    @Query('page') page: any,
+  ) {
+    return 'Return all users';
   }
 
   @Post()
   public createUser(@Body() request: any) {
     return 'Create a new user - ' + request.firstName + ' ' + request.lastName;
-  }
-
-  @Delete()
-  public deleteUser(@Query() query: any) {
-    return `Delete a user - ${query.limit}`;
   }
 }
