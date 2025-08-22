@@ -31,3 +31,11 @@ Built-in pipes in NestJS require a value, so they don’t work well with optiona
 DTO - Data Transfer Object
 
 In NestJS, a **DTO** is a class created using **class-validator**. Class-validator provides various **validation decorators** that can be used on each property of the object to enforce rules.
+
+# Creating our First DTO
+
+To validate DTOs, we should install the `class-validator`
+
+# Connecting DTO to Route Method
+
+`class-transformer` - transforms a DTO class into a proper class instance that we can use in our application.
