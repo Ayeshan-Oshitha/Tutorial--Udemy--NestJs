@@ -25,3 +25,9 @@ Pipes usually perform **two major functions**:
 # Validating Params with Built-in Pipes
 
 Built-in pipes in NestJS require a value, so they don’t work well with optional parameters. To validate optional parameters, it’s better to use DTOs.
+
+# Introduction to DTO
+
+DTO - Data Transfer Object
+
+In NestJS, a **DTO** is a class created using **class-validator**. Class-validator provides various **validation decorators** that can be used on each property of the object to enforce rules.
