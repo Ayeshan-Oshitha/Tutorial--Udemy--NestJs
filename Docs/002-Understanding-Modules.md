@@ -153,8 +153,6 @@ public deleteUser(@Query('limit') limit: string) {
   }
 ```
 
----
-
 ### Express Request Object
 
 NestJS internally uses Express, so we can access the Express request object using `@Req()` and type it with the Express `Request` interface.
@@ -165,3 +163,9 @@ NestJS internally uses Express, so we can access the Express request object usin
     return `Create user - Name: ${request.body.name}`;
   }
 ```
+
+# Additional Request Components
+
+`@Headers` - get the request headers
+
+`@IP` - get the request IP address
