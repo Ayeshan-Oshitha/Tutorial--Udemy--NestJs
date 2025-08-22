@@ -169,3 +169,11 @@ NestJS internally uses Express, so we can access the Express request object usin
 `@Headers` - get the request headers
 
 `@IP` - get the request IP address
+
+# Providers in Nest JS
+
+Think of providers as additional classes in a module that help you add business logic to your module.
+
+Many of the basic Nest classes may be treated as a provider - **services, repositories, factories, helpers** and so on.
+
+<img src="./images/images-01/image-14.png" width="700">
