@@ -21,3 +21,7 @@ Pipes usually perform **two major functions**:
 ### Type Of Pipes
 
 <img src="./images/images-02/image-4.png" width="700">
+
+# Validating Params with Built-in Pipes
+
+Built-in pipes in NestJS require a value, so they don’t work well with optional parameters. To validate optional parameters, it’s better to use DTOs.
