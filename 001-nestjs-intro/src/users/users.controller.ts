@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  DefaultValuePipe,
   Get,
   Param,
   ParseIntPipe,
@@ -24,8 +25,8 @@ export class UsersController {
   @Get('/{:id}')
   public getUsers(
     @Param('id', ParseIntPipe) id: number | undefined,
-    @Query('limit') limit: any,
-    @Query('page') page: any,
+    @Query('limit', new DefaultValuePipe(10), ParseIntPipe) limit: number,
+    @Query('page', new DefaultValuePipe(1), ParseIntPipe) page: number,
   ) {
     return 'Return all users';
   }
