@@ -112,3 +112,56 @@ Controller contains all the routing logic of our application. The purpose of con
 <img src="./images/images-01/image-13.png" width="700">
 
 `nest generate controller users --no-spec` - Generate a Users controller without creating a test (spec) file
+
+# Params, Query and Body
+
+### Params
+
+`@Get('/:id') `- required Param
+
+`@Get('/:id?')` - optional Param (express 4)
+
+`@Get('{/:id}')` or `@Get('/{:id}')` - optional Param (express 5)
+
+Always put required route parameters first, then optional ones
+
+```javascript
+@Get('/:id{/:name}')
+getUser(@Param('id') id: string, @Param('name') name?: string) {
+  return `User ${id} - ${name ?? 'no name'}`;
+}
+```
+
+### Query
+
+```javascript
+@Delete()
+public deleteUser(@Query('limit') limit: string) {
+  return `Delete a user - ${limit}`;
+}
+```
+
+### Body
+
+```javascript
+@Post()
+ public createUser(
+    @Body('name') name: string,
+    @Body('age') age: string,
+  ) {
+    return `Create user - Name: ${name}, Age: ${age}`;
+  }
+```
+
+---
+
+### Express Request Object
+
+NestJS internally uses Express, so we can access the Express request object using `@Req()` and type it with the Express `Request` interface.
+
+```javascript
+@Post()
+ public createUser( @Req() request: Request,) {
+    return `Create user - Name: ${request.body.name}`;
+  }
+```
