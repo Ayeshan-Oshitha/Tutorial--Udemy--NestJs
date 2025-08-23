@@ -39,3 +39,11 @@ To validate DTOs, we should install the `class-validator`
 # Connecting DTO to Route Method
 
 `class-transformer` - transforms a DTO class into a proper class instance that we can use in our application.
+
+# Global Pipes and Avoiding Malicious request
+
+With a **Global Validation Pipe**, if a controller method has a **DTO class** associated with it, NestJS will automatically validate the incoming request.
+
+- `whitelist: true` – If any property does not exist in the DTO, NestJS will _automatically remove_ that property before passing the data to the controller.
+
+- `forbidNonWhitelisted: true` – If any property does not exist in the DTO, NestJS will _throw a validation error_ instead of silently removing it.
