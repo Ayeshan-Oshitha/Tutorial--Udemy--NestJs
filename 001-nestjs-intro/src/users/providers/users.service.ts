@@ -23,4 +23,8 @@ export class UsersService {
       },
     ];
   }
+
+  public findById(id: number) {
+    return 'User with id: ' + id;
+  }
 }
