@@ -50,10 +50,14 @@ With a **Global Validation Pipe**, if a controller method has a **DTO class** as
 
 # Converting to an Instance of DTO
 
-`transform: true` – Converts the incoming request data into an **instance of the DTO class.**
+`transform: true` – Converts the incoming request data into an **instance of the DTO class.** Until this is enabled, the data is just a plain JavaScript object and **not an instance** of the DTO.
 
-- Until this is enabled, the data is just a plain JavaScript object and **not an instance** of the DTO.
+# Using DTOs with Params
 
-- With `transform: true`, strings and other primitive types will be **automatically converted to** the appropriate types defined in the DTO.
+All **route parameters** and **query parameters** are strings by default.
 
-- NestJS will then validate the object(nested objects), and any methods defined in the DTO class will be accessible.
+To transform them to the necessary type in a DTO, we should use **class-transformer**.
+
+`transform: true` only converts a plain JavaScript object into an **instance of the DTO** and does not automatically convert primitive types.
+
+<img src="./images/images-02/image-5.png" width="500">
