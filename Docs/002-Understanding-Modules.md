@@ -121,7 +121,7 @@ Controller contains all the routing logic of our application. The purpose of con
 
 `@Get('/:id?')` - optional Param (express 4)
 
-`@Get('{/:id}')` or `@Get('/{:id}')` - optional Param (express 5)
+`@Get('{/:id}')` ` - optional Param (express 5)
 
 Always put required route parameters first, then optional ones
 

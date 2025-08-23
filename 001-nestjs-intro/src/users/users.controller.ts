@@ -10,6 +10,7 @@ import {
   ValidationPipe,
 } from '@nestjs/common';
 import { CreateUserDto } from './dtos/create-user.dto';
+import { GetUsersParamDto } from './dtos/get-users-param.dto';
 
 @Controller('users')
 export class UsersController {
@@ -24,9 +25,9 @@ export class UsersController {
    * users?limit=5&page=2 returns page 2 with limit of pagination 5
    */
 
-  @Get('/{:id}')
+  @Get('{/:id}')
   public getUsers(
-    @Param('id', ParseIntPipe) id: number | undefined,
+    @Param() getUsersParamDto: GetUsersParamDto,
     @Query('limit', new DefaultValuePipe(10), ParseIntPipe) limit: number,
     @Query('page', new DefaultValuePipe(1), ParseIntPipe) page: number,
   ) {
