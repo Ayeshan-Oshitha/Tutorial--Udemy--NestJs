@@ -47,3 +47,13 @@ With a **Global Validation Pipe**, if a controller method has a **DTO class** as
 - `whitelist: true` – If any property does not exist in the DTO, NestJS will _automatically remove_ that property before passing the data to the controller.
 
 - `forbidNonWhitelisted: true` – If any property does not exist in the DTO, NestJS will _throw a validation error_ instead of silently removing it.
+
+# Converting to an Instance of DTO
+
+`transform: true` – Converts the incoming request data into an **instance of the DTO class.**
+
+- Until this is enabled, the data is just a plain JavaScript object and **not an instance** of the DTO.
+
+- With `transform: true`, strings and other primitive types will be **automatically converted to** the appropriate types defined in the DTO.
+
+- NestJS will then validate the object(nested objects), and any methods defined in the DTO class will be accessible.
