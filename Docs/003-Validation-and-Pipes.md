@@ -61,3 +61,14 @@ To transform them to the necessary type in a DTO, we should use **class-transfor
 `transform: true` only converts a plain JavaScript object into an **instance of the DTO** and does not automatically convert primitive types.
 
 <img src="./images/images-02/image-5.png" width="500">
+
+# Using Mapped Types to Avoid Code Duplication
+
+`npm i @nestjs/mapped-types`
+
+Mapped types allow you to create new DTOs from existing ones, avoiding code duplication.
+
+- `PartialType` – Makes all properties of the existing DTO **optional**.
+- `PickType` – Creates a new DTO with only the **selected properties** from the existing DTO.
+- `OmitType` – Creates a new DTO **excluding certain properties** from the existing DTO.
+- `IntersectionType` – Combines two or more DTOs into one.
