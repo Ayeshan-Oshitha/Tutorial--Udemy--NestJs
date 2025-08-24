@@ -14,5 +14,7 @@ export class PostsController {
   }
 
   @Post()
-  public createPost(@Body() createPostSto: CreatePostDto) {}
+  public createPost(@Body() createPostSto: CreatePostDto) {
+    console.log(createPostSto);
+  }
 }
