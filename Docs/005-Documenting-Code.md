@@ -11,3 +11,7 @@ The **OpenAPI Specification** is a standard for describing APIs. It provides a s
 **Swagger** is an open-source toolset that works with the OpenAPI Specification to design, build, and document APIs. Swagger includes multiple tools, but in **NestJS**, the most commonly used tool is **Swagger UI** for API documentation.
 
 Although Swagger has its own ecosystem, when used with NestJS, it still **follows the OpenAPI Specification.**
+
+# Enabling Swagger in Nest JS
+
+`npm @nestjs/swagger` - Install Nest JS
