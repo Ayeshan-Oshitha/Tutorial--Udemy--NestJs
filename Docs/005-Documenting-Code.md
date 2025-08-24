@@ -14,4 +14,8 @@ Although Swagger has its own ecosystem, when used with NestJS, it still **follow
 
 # Enabling Swagger in Nest JS
 
-`npm @nestjs/swagger` - Install Nest JS
+`npm i @nestjs/swagger` - Install Nest JS
+
+# Getting Started with CompoDoc
+
+`npm i @compodoc/compodoc` - Install CompoDoc
