@@ -63,3 +63,19 @@ At teh time iod bootstraping Nest jc crats the instantoates all these 3 classes 
 ### 3 Steps for Injection
 
 <img src="./images/images-03/image-9.png" width="800">
+
+# Types of Dependencies
+
+### 1. Intra-Modular Dependency
+
+<img src="./images/images-03/image-10.png" width="300">
+
+### 2. Inter-Modular Dependency
+
+<img src="./images/images-03/image-11.png" width="700">
+
+### 3. Circular Dependency
+
+<img src="./images/images-03/image-12.png" width="700">
+
+Requires a special treatment from nest Js
