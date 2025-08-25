@@ -47,3 +47,7 @@ The supported databases are not limited to the ones shown; NestJS supports many 
 `npm i @nestjs/typeorm` - Install the NestJS integration for TypeORM, so you can use it in NestJS projects
 
 `npm i pg` - Install the PostgreSQL driver for Node.js, required for TypeORM to connect to PostgreSQL
+
+# Using Async Configuration
+
+The advantage of having an asynchronous connection is that we can **directly inject the configuration object** into our database settings. This allows us to **read configuration from different environment files.**
