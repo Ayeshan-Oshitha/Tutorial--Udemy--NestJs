@@ -4,6 +4,38 @@ In NestJS, only the service file is responsible for working with the database. H
 
 <img src="./images/images-05/image-1.png" width="800">
 
+---
+
 <img src="./images/images-05/image-2.png" width="800">
 
 The supported databases are not limited to the ones shown; NestJS supports many more.
+
+# What is an ORM ?
+
+<img src="./images/images-05/image-3.png" width="800">
+
+---
+
+<img src="./images/images-05/image-4.png" width="800">
+
+---
+
+<img src="./images/images-05/image-5.png" width="800">
+
+---
+
+<img src="./images/images-05/image-6.png" width="800">
+
+---
+
+<img src="./images/images-05/image-7.png" width="800">
+
+---
+
+<img src="./images/images-05/image-8.png" width="800">
+
+### ORM - Disadvantages
+
+- Less Control Over Low Level Code
+
+- In Case of Complex Queries, Performance Optimization can be a problem ( But we can pass raw sql queries using ORM too )
