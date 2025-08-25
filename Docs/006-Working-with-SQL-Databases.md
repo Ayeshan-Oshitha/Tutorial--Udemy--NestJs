@@ -51,3 +51,15 @@ The supported databases are not limited to the ones shown; NestJS supports many 
 # Using Async Configuration
 
 The advantage of having an asynchronous connection is that we can **directly inject the configuration object** into our database settings. This allows us to **read configuration from different environment files.**
+
+# Theoretical Understanding of the Repository Pattern
+
+<img src="./images/images-05/image-9.png" width="800">
+
+once we crt re entity filr, we can inekct teh repostory, so we don not creat uses repository file, This cfrtion of trepository in taken care by typ orm, we jsut ionject repository to teh Service. so repository ism not a file, It is something injectable intol users setvice
+
+<img src="./images/images-05/image-10.png" width="800">
+
+---
+
+<img src="./images/images-05/image-11.png" width="700">
