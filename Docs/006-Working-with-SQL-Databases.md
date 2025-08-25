@@ -39,3 +39,11 @@ The supported databases are not limited to the ones shown; NestJS supports many 
 - Less Control Over Low Level Code
 
 - In Case of Complex Queries, Performance Optimization can be a problem ( But we can pass raw sql queries using ORM too )
+
+# Connecting NestJS to PostgreSQL
+
+`npm i typeorm` - Install TypeORM, the ORM (Object Relational Mapper) for Node.js/TypeScript
+
+`npm i @nestjs/typeorm` - Install the NestJS integration for TypeORM, so you can use it in NestJS projects
+
+`npm i pg` - Install the PostgreSQL driver for Node.js, required for TypeORM to connect to PostgreSQL
