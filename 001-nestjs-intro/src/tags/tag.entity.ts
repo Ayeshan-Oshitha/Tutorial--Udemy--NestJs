@@ -32,13 +32,13 @@ export class Tag {
     type: 'text',
     nullable: true,
   })
-  description: string;
+  description?: string;
 
   @Column({
     type: 'text',
     nullable: true,
   })
-  schema: string;
+  schema?: string;
 
   @Column({
     type: 'varchar',
