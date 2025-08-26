@@ -17,3 +17,7 @@
 ---
 
 <img src="./images/images-06/image-4.png" width="800">
+
+# Auto-Loading Entities
+
+In TypeORM, you can set autoLoadEntities: true to avoid listing all entities in app.module.ts, but each entity still needs to be imported in its own module.
