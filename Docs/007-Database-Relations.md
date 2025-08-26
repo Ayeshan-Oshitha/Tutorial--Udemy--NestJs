@@ -20,4 +20,26 @@
 
 # Auto-Loading Entities
 
-In TypeORM, you can set autoLoadEntities: true to avoid listing all entities in app.module.ts, but each entity still needs to be imported in its own module.
+In TypeORM, you can set `autoLoadEntities: true` to avoid listing all entities in app.module.ts, but each entity still needs to be imported in its own module.
+
+# One-to-One Relationship
+
+One to One relationships have two types.
+
+1. Uni-directional One to One relationship
+2. Bi-directional One to One relationship
+
+# Uni-Directional One To One Relationship
+
+<img src="./images/images-06/image-5.png" width="600">
+
+A post can have only one metaOption.
+
+In a **uni-directional one-to-one relationship**, only one entity is aware of the relationship. Here, the Post entity knows about the relationship, while the **MetaOptions** entity does not.
+
+If both entities are aware of the relationship, it becomes a **bi-directional one-to-one relationship**.
+
+To add a uni-directional relationship, we use two decorators:
+
+- `@OneToOne` → defines the relationship with the other table.
+- `@JoinColumn `→ creates the column to maintain the relationship.
