@@ -71,7 +71,7 @@ export class Post {
   publishOn?: Date;
 
   @OneToOne(() => MetaOption)
-  // @JoinColumn()
+  @JoinColumn()
   metaOptions?: MetaOption;
 
   // work on these later
