@@ -18,21 +18,10 @@ export class PostsService {
     private readonly metaOptionsRepository: Repository<MetaOption>,
   ) {}
 
-  public findAll(userId: string) {
-    const user = this.userService.findById(userId);
+  public async findAll(userId: string) {
+    let posts = await this.postsRepository.find();
 
-    return [
-      {
-        title: 'Post 1',
-        content: 'Content of Post 1',
-        user: user,
-      },
-      {
-        title: 'Post 2',
-        content: 'Content of Post 2',
-        user: user,
-      },
-    ];
+    return posts;
   }
 
   public async create(createPostDto: CreatePostDto) {
