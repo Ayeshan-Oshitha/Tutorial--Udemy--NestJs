@@ -1,9 +1,11 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   HttpStatus,
   Param,
+  ParseIntPipe,
   Patch,
   Post,
 } from '@nestjs/common';
@@ -43,4 +45,9 @@ export class PostsController {
     description: 'Post created successfully. Returns the created post.',
   })
   public updatePost(@Body() patchPostDto: PatchPostDto) {}
+
+  @Delete(':id')
+  public deletePost(@Param('id', ParseIntPipe) id: number) {
+    return this.postsService.delete(id);
+  }
 }

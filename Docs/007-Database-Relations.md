@@ -69,3 +69,7 @@ Alternatively, we can configure the relation itself with eager: true, so TypeORM
   @JoinColumn()
   metaOptions?: MetaOption;
 ```
+
+# Deleting Related Entities
+
+In Uni-Directional One-to-One relationship, Cascade delete is not possible, So we have to perform sequential delete. ( One row of one table and then go to other table)
