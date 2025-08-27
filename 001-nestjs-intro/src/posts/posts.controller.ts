@@ -31,7 +31,7 @@ export class PostsController {
     description: 'Post created successfully. Returns the created post.',
   })
   public createPost(@Body() createPostSto: CreatePostDto) {
-    console.log(createPostSto);
+    return this.postsService.create(createPostSto);
   }
 
   @Patch()
