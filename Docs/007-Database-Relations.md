@@ -83,3 +83,45 @@ In a bi-directional relationship, both entities are aware of the relationship. T
 In a _uni-directional one-to-one relationship_, we can only navigate from one entity to the other (for example, we can find `metaOptions` through the `post` table, but we cannot find a `post` using the `metaOptions` table).
 
 When we enable a bi-directional relationship, we can navigate in both directions — meaning we can find either entity through the other.
+
+# Cascade Delete with Bi-Directional Relationship
+
+Currently, the foreign key is in the **Post** table.
+
+However, to enable cascade delete from the Post entity, the foreign key should be in the **MetaOptions** table. This is because what we need is: when deleting a Post, its related MetaOption should also be deleted — not the other way around (deleting a MetaOption should not delete the Post).
+
+My Explanation - The reason is that normally, we cannot delete a record if its ID is still referenced elsewhere. By placing the foreign key in the MetaOptions table, when we delete a Post, the database sees that it has a related MetaOption and deletes MetaOption record first, before deleting the Post itself.
+
+---
+
+### Therotical Explanation
+
+- One of the tables must hold the foreign key.
+
+- That table is considered the owner of the relationship. ( So, In relationship, Owner is dependat on the other table)
+
+_Being the owner in TypeORM just means “this side has the foreign key._
+
+My Note - The entity that has FK is also considered as the child
+
+#### Who is Parent vs Dependent?
+
+- Parent (Principal) → Post
+
+  - It does not depend on MetaOption.
+
+  - A Post can exist without a MetaOption (if you design it that way).
+
+- Dependent (Child) → MetaOption
+
+  - It depends on Post, because it has a foreign key (postId).
+
+  - It cannot exist without referencing a Post.
+
+**Cascade delete** = `when the` **`parent row`** `is deleted, the dependent row(s) with the FK are automatically deleted by the database (ON DELETE CASCADE).`
+
+#### Cascade Delete Behavior
+
+If you delete a Post (parent) → the database will also delete the related MetaOption (child) because of ON DELETE CASCADE.
+
+If you delete a MetaOption (child) → nothing happens to the Post, since the parent does not depend on the child.
