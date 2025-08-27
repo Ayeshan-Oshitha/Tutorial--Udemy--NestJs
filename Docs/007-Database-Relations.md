@@ -43,3 +43,11 @@ To add a uni-directional relationship, we use two decorators:
 
 - `@OneToOne` → defines the relationship with the other table.
 - `@JoinColumn `→ creates the column to maintain the relationship.
+
+# Cascade Creation with Relationship
+
+With cascade enabled, we can automatically apply related operations (such as insert, update, or delete) to the associated entities
+
+- `Insert`: automatically insert the related entity if it doesn’t exist.
+- `Update`: update the related entity if it already exists (i.e., it has an id).
+- `Remove`: remove the related entity if you explicitly remove it.
