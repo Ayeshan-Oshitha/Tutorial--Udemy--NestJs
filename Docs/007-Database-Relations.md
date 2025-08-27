@@ -51,3 +51,21 @@ With cascade enabled, we can automatically apply related operations (such as ins
 - `Insert`: automatically insert the related entity if it doesn’t exist.
 - `Update`: update the related entity if it already exists (i.e., it has an id).
 - `Remove`: remove the related entity if you explicitly remove it.
+
+# Querying with Eager Loading
+
+If we want to get related data, the first option is to use the relations option. TypeORM will fetch the related data as well. ( This is known as explicit loading.)
+
+```javascript
+let posts = await this.postsRepository.find({
+  relations: { metaOptions: true },
+});
+```
+
+Alternatively, we can configure the relation itself with eager: true, so TypeORM automatically loads the related entity whenever we fetch the main entity: ( This is known as eager loading)
+
+```typescript
+ @OneToOne(() => MetaOption, { cascade: true, eager: true })
+  @JoinColumn()
+  metaOptions?: MetaOption;
+```
