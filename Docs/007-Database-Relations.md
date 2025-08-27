@@ -73,3 +73,13 @@ Alternatively, we can configure the relation itself with eager: true, so TypeORM
 # Deleting Related Entities
 
 In Uni-Directional One-to-One relationship, Cascade delete is not possible, So we have to perform sequential delete. ( One row of one table and then go to other table)
+
+# Bi-Directional One-To-One Relationship
+
+In a bi-directional relationship, both entities are aware of the relationship. The foreign key can reside in either table, but it will be placed on the side where the `@JoinColumn` decorator is used.
+
+# Creating a Bi-Directional Relationship
+
+In a _uni-directional one-to-one relationship_, we can only navigate from one entity to the other (for example, we can find `metaOptions` through the `post` table, but we cannot find a `post` using the `metaOptions` table).
+
+When we enable a bi-directional relationship, we can navigate in both directions — meaning we can find either entity through the other.
