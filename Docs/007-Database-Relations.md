@@ -145,3 +145,11 @@ In the case of Many-to-One and One-to-Many relationships, we don’t have to use
 A _Many-to-One relationship_ can be _uni-directional_, meaning we only access the User from a Post. However, if we also want to access all posts from a user (One-to-Many), it becomes **bi-directional**.
 
 In many cases, _One-to-Many_ and _Many-to-One go_ hand in hand. So, we usually treat _One-to-Many_ and _Many-to-One_ as a **bi-directional relationship** between two entities.
+
+# Many to Many Relationship
+
+<img src="./images/images-06/image-7.png" width="600">
+
+Here , An Intermediate table is created to manage the relationship.
+
+In _Many to Many relationship_, We can have _uni-directional relationship_ as well as _bi-directional relationship_.
