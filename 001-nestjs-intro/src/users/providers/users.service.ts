@@ -51,8 +51,8 @@ export class UsersService {
   /**
    * Method to find a user by id
    */
-  public findById(id: string) {
-    return 'User with id: ' + id;
+  public async findById(id: number) {
+    return await this.usersRepository.findOneBy({ id });
   }
 
   /**
