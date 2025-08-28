@@ -125,3 +125,23 @@ My Note - The entity that has FK is also considered as the child
 If you delete a Post (parent) → the database will also delete the related MetaOption (child) because of ON DELETE CASCADE.
 
 If you delete a MetaOption (child) → nothing happens to the Post, since the parent does not depend on the child.
+
+# One to Many Relationshop
+
+<img src="./images/images-06/image-6.png" width="600">
+
+A **User** has a _one-to-many relationship_ with **Post**, and a **Post** has a _many-to-one relationship_ with **User** (e.g., many posts, and each post belongs to one user).
+
+One user can have many posts, while one post can have only one user.
+
+_One-to-Many / Many-to-One relationships_ are considered bi-directional relationships.
+
+The _foreign key_ always lies on the **Many** side.
+
+In the case of Many-to-One and One-to-Many relationships, we don’t have to use the `@JoinColumn` decorator on the One-to-Many side. The `@JoinColumn` always lies on the **Many-to-One side**.
+
+#### Extra ->
+
+A _Many-to-One relationship_ can be _uni-directional_, meaning we only access the User from a Post. However, if we also want to access all posts from a user (One-to-Many), it becomes **bi-directional**.
+
+In many cases, _One-to-Many_ and _Many-to-One go_ hand in hand. So, we usually treat _One-to-Many_ and _Many-to-One_ as a **bi-directional relationship** between two entities.
