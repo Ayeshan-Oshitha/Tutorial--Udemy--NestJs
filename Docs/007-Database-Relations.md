@@ -159,3 +159,7 @@ In _Many to Many relationship_, We can have _uni-directional relationship_ as we
 Just like a one-to-one relationship, a many-to-many relationship also requires a decorator called `@JoinTable`. This `@JoinTable` decorator must be placed on the entity that is on the owning side of the relationship.
 
 In this case, `Post` will be the owning side of the relationship because we need to fetch tags along with the posts as part of the post. This setup is used for **uni-directional relationships**.
+
+# Querying Many to Many Relationship
+
+Just like in one-to-one and many-to-one relationships, when querying we can use **explicit loading** (by specifying `relations`) or **eager loading**.

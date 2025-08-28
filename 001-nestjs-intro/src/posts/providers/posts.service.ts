@@ -22,7 +22,11 @@ export class PostsService {
   ) {}
 
   public async findAll(userId: string) {
-    let posts = await this.postsRepository.find();
+    let posts = await this.postsRepository.find({
+      relations: {
+        tags: true,
+      },
+    });
 
     return posts;
   }
