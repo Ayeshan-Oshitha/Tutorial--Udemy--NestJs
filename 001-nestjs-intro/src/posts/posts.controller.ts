@@ -44,7 +44,9 @@ export class PostsController {
     status: HttpStatus.OK,
     description: 'Post created successfully. Returns the created post.',
   })
-  public updatePost(@Body() patchPostDto: PatchPostDto) {}
+  public updatePost(@Body() patchPostDto: PatchPostDto) {
+    return this.postsService.update(patchPostDto);
+  }
 
   @Delete(':id')
   public deletePost(@Param('id', ParseIntPipe) id: number) {
