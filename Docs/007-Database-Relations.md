@@ -153,3 +153,9 @@ In many cases, _One-to-Many_ and _Many-to-One go_ hand in hand. So, we usually t
 Here , An Intermediate table is created to manage the relationship.
 
 In _Many to Many relationship_, We can have _uni-directional relationship_ as well as _bi-directional relationship_.
+
+# Uni-Directional Many to Many Relationships
+
+Just like a one-to-one relationship, a many-to-many relationship also requires a decorator called `@JoinTable`. This `@JoinTable` decorator must be placed on the entity that is on the owning side of the relationship.
+
+In this case, `Post` will be the owning side of the relationship because we need to fetch tags along with the posts as part of the post. This setup is used for **uni-directional relationships**.
