@@ -158,8 +158,16 @@ In _Many to Many relationship_, We can have _uni-directional relationship_ as we
 
 Just like a one-to-one relationship, a many-to-many relationship also requires a decorator called `@JoinTable`. This `@JoinTable` decorator must be placed on the entity that is on the owning side of the relationship.
 
-In this case, `Post` will be the owning side of the relationship because we need to fetch tags along with the posts as part of the post. This setup is used for **uni-directional relationships**.
+In this case, `Post` will be the owning side of the relationship because we need to fetch tags along with the posts as part of the post (We don't need to fetch posts through tags.). This setup is used for **uni-directional relationships**.
 
 # Querying Many to Many Relationship
 
 Just like in one-to-one and many-to-one relationships, when querying we can use **explicit loading** (by specifying `relations`) or **eager loading**.
+
+# Deleting Post and Relationship.
+
+In a _uni-directional many-to-many relationship_, the table that defines the foreign key through the `@JoinColumn` is considered the **owning side** of the relationship.
+
+For example, if the `Post` entity has a many-to-many relationship with `Tag`, an intermediate table `post_tags` is created. Since `Post` is the owning side, when we delete a `Post`, the associated records in `post_tags` that reference that post are also deleted automatically if **cascade delete** is enabled. ( By Default Cascade Delete will work automatically in Uni Directional Many to Many Relationship)
+
+This happens because in a uni-directional relationship, we only need to access `Tags` through `Post`. Therefore, when a `Post` is removed, its related join entries are also removed, as they are no longer needed.
