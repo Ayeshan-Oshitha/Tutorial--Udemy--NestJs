@@ -171,3 +171,9 @@ In a _uni-directional many-to-many relationship_, the table that defines the for
 For example, if the `Post` entity has a many-to-many relationship with `Tag`, an intermediate table `post_tags` is created. Since `Post` is the owning side, when we delete a `Post`, the associated records in `post_tags` that reference that post are also deleted automatically if **cascade delete** is enabled. ( By Default Cascade Delete will work automatically in Uni Directional Many to Many Relationship)
 
 This happens because in a uni-directional relationship, we only need to access `Tags` through `Post`. Therefore, when a `Post` is removed, its related join entries are also removed, as they are no longer needed.
+
+# Bi-Directional Many to Many Relationship
+
+In a **bi-directional relationship**, we can query from either side. For example, when searching for a `Post`, we can also retrieve its related `Tags`. Similarly, when searching for a `Tag`, we can retrieve its related `Posts`.
+
+In other words, bi-directional means we can navigate the relationship from both sides.
