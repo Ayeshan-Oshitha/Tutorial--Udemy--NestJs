@@ -177,3 +177,9 @@ This happens because in a uni-directional relationship, we only need to access `
 In a **bi-directional relationship**, we can query from either side. For example, when searching for a `Post`, we can also retrieve its related `Tags`. Similarly, when searching for a `Tag`, we can retrieve its related `Posts`.
 
 In other words, bi-directional means we can navigate the relationship from both sides.
+
+# Cascade Delete with Many To Many
+
+In a **many-to-many relationship** (e.g., between `Post` and `Tag`), the join table holds the foreign keys. When we delete a `Post`, the related records in the join table are deleted automatically if cascade is configured( Mostly, It is automatically configured).
+
+However, if we try to delete a `Tag` that is still referenced in the join table, it will not work automatically. To allow this, we need to explicitly configure **cascade on delete** for the `Tag` side as well, so that records in the join table are removed when a `Tag` is deleted.
