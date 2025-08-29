@@ -183,3 +183,18 @@ In other words, bi-directional means we can navigate the relationship from both 
 In a **many-to-many relationship** (e.g., between `Post` and `Tag`), the join table holds the foreign keys. When we delete a `Post`, the related records in the join table are deleted automatically if cascade is configured( Mostly, It is automatically configured).
 
 However, if we try to delete a `Tag` that is still referenced in the join table, it will not work automatically. To allow this, we need to explicitly configure **cascade on delete** for the `Tag` side as well, so that records in the join table are removed when a `Tag` is deleted.
+
+# Soft Delete Tags
+
+In a **soft delete**, instead of actually removing the record from the table, only the `deleted` **column timestamp** is updated.
+
+For example, consider a `Post` table, a `Tag` table, and the join table `post_tags`.
+
+- **Normal delete:**
+
+  When you delete a Tag, the tag record is removed from the Tag table, and any associated records in post_tags are also deleted.
+
+- **Soft delete:**
+
+  When you soft delete a `Tag`, only the `deleted` timestamp in the `Tag` table is updated. The tag record remains in the database, and the related entries in `post_tags` are **not removed**.
+  As a result, when querying a `Post`, it may still show the soft-deleted tags unless your query explicitly filters them out.
