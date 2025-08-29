@@ -15,4 +15,9 @@ export class TagsController {
   public delete(@Param('id') id: number) {
     return this.tagsService.delete(id);
   }
+
+  @Delete('soft-delete/:id')
+  public softDelete(@Param('id') id: number) {
+    return this.tagsService.softRemove(id);
+  }
 }
