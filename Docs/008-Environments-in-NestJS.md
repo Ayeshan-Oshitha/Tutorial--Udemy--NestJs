@@ -52,3 +52,11 @@ console.log("From Env", process.env.S3_BUCKET);
 const environment = this.configService.get<string>("S3_BUCKET");
 console.log("Environment Variable:", environment);
 ```
+
+# Custom Configuration Files
+
+Custom configuration files are files that read from environment variables, and we can use those files to assign environment variables wherever needed.
+
+The advantage of creating such configuration files is that we can have different files for different modules and functionalities of the application (for example, we can have a separate file for database credentials).
+
+Note: It is okay to read variables in _configuration files_ and _app.module.ts_ through `process.env` . However, in other parts of the application, you should use the `ConfigService` to read the application configuration.
