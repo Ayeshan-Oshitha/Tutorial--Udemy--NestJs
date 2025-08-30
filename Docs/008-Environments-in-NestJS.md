@@ -60,3 +60,7 @@ Custom configuration files are files that read from environment variables, and w
 The advantage of creating such configuration files is that we can have different files for different modules and functionalities of the application (for example, we can have a separate file for database credentials).
 
 Note: It is okay to read variables in _configuration files_ and _app.module.ts_ through `process.env` . However, in other parts of the application, you should use the `ConfigService` to read the application configuration.
+
+# Config Files with Namespaces
+
+The `registerAs` function in NestJS allows us to register our configuration object under a **namespace**.
