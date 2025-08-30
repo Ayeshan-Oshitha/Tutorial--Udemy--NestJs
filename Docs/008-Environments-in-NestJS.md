@@ -15,3 +15,40 @@ In NestJS, **.env** files store environment variables, and the **Config Module**
 `npm i @nestjs/config`
 
 If we don’t set `isGlobal: true` in the Config Module, we have to import the Config Module in every module where we need it. But if we enable `isGlobal: true`, we don’t need to do that since it makes the Config Module available everywhere automatically.
+
+# Confirming NODE_ENV While Testing
+
+When testing NestJS applications, Jest automatically sets NODE_ENV to test.
+
+**Extra** - For unit tests, Jest uses the configuration in package.json, and for end-to-end (e2e) tests, it uses the configuration in jest-e2e.json.
+
+# Conditionally Loading Environments
+
+In MacOS/Linux = `"start:dev": "NODE_ENV=development nest start --watch"`
+
+In Windows - Above is not working.
+
+1. **First Option** - use _cross_env_ package
+
+`"start:dev": "cross-env NODE_ENV=development nest start --watch"`
+
+2. **Second Option** - use windows Specific
+
+`"start:dev": "set NODE_ENV=development&& nest start --watch"` - Works only in Windows Command Prompt. Won’t work in Linux/macOS.
+
+#### Extra -
+
+There are two ways to read the env details from `.env` file.
+
+1. **Directly read from _env_ file**
+
+```javascript
+console.log("From Env", process.env.S3_BUCKET);
+```
+
+2. **Read from ConfigModule**
+
+```typescript
+const environment = this.configService.get<string>("S3_BUCKET");
+console.log("Environment Variable:", environment);
+```
