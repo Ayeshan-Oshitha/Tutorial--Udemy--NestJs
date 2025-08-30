@@ -5,6 +5,7 @@ import { Repository } from 'typeorm';
 import { User } from '../user.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { CreateUserDto } from '../dtos/create-user.dto';
+import { ConfigService } from '@nestjs/config';
 
 /**
  * Class to connect users table and perform business operations
@@ -17,8 +18,11 @@ export class UsersService {
   constructor(
     @Inject(forwardRef(() => AuthService))
     private readonly authService: AuthService,
+
     @InjectRepository(User)
     private usersRepository: Repository<User>,
+
+    private readonly configService: ConfigService,
   ) {}
 
   /**
@@ -29,8 +33,8 @@ export class UsersService {
     limit: number,
     page: number,
   ) {
-    const isAuthenticated = this.authService.isAuthenticated();
-    console.log(isAuthenticated);
+    const environment = this.configService.get<string>('S3_BUCKET');
+    console.log('Environment Variable:', environment);
 
     return [
       {
