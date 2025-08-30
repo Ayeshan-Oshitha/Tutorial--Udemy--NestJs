@@ -64,3 +64,7 @@ Note: It is okay to read variables in _configuration files_ and _app.module.ts_ 
 # Config Files with Namespaces
 
 The `registerAs` function in NestJS allows us to register our configuration object under a **namespace**.
+
+# Module Configuration and Partial Registration
+
+With _partial registration_, it is possible to have _module-specific configuration files_. For example, if we need a configuration file just for the **Users** module, we can create one. This approach provides type safety, unlike using only global configuration files.
