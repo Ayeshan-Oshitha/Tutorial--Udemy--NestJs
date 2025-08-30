@@ -68,3 +68,11 @@ The `registerAs` function in NestJS allows us to register our configuration obje
 # Module Configuration and Partial Registration
 
 With _partial registration_, it is possible to have _module-specific configuration files_. For example, if we need a configuration file just for the **Users** module, we can create one. This approach provides type safety, unlike using only global configuration files.
+
+# Validating Environmental Variable
+
+Once we have validation in place for environment variables, developers will immediately know if a required variable is missing or invalid.
+
+To validate environment variables, we use a package called Joi.
+
+`npm i joi`
