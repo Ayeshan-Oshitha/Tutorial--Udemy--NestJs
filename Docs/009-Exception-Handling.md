@@ -30,7 +30,7 @@ NestJS comes with many prebuilt exception classes and methods.
 
 # Exception Handling Model Constraints
 
-My Note -->
+#### My Note
 
 - **Try/Catch** - for unpredictable runtim errors.
 - **Direct throw** - for expected business logic errors
