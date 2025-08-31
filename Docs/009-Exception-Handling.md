@@ -27,3 +27,10 @@ NestJS comes with many prebuilt exception classes and methods.
 <img src="./images/images-08/image-6.png" width="700">
 
 **Note**: Even in middleware, it is important to handle exceptions. We can throw exceptions in middleware. (Middleware do not come under NestJS’s automatic exception handling. If something breaks in middleware and we don’t handle it, NestJS will not automatically send a 500 Internal Server Error — we must handle it manually. )
+
+# Exception Handling Model Constraints
+
+My Note -->
+
+- **Try/Catch** - for unpredictable runtim errors.
+- **Direct throw** - for expected business logic errors
