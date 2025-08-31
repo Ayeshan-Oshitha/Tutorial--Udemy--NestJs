@@ -1,6 +1,8 @@
 import {
   BadRequestException,
   forwardRef,
+  HttpException,
+  HttpStatus,
   Inject,
   Injectable,
   RequestTimeoutException,
@@ -13,6 +15,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { CreateUserDto } from '../dtos/create-user.dto';
 import type { ConfigType } from '@nestjs/config';
 import profileConfig from '../config/profile.config';
+import { error } from 'console';
 
 /**
  * Class to connect users table and perform business operations
@@ -41,7 +44,19 @@ export class UsersService {
     limit: number,
     page: number,
   ) {
-    console.log(this.profileConfiguration.apiKey);
+    // mimic error - API Endpoint is moved permanantely
+    throw new HttpException(
+      {
+        status: HttpStatus.MOVED_PERMANENTLY,
+        error: 'This endpoint has been moved permanantely to new location',
+        fileName: 'users.service.ts',
+        lineNumber: 54,
+      },
+      HttpStatus.MOVED_PERMANENTLY,
+      {
+        description: ' Occured because API Endpoint Permentely Mopved',
+      },
+    );
 
     return [
       {
