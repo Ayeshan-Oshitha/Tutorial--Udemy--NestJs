@@ -1,4 +1,8 @@
-import { Injectable } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  RequestTimeoutException,
+} from '@nestjs/common';
 import { UsersService } from 'src/users/providers/users.service';
 import { CreatePostDto } from '../dtos/create-post.dto';
 import { Repository } from 'typeorm';
@@ -7,6 +11,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { MetaOption } from 'src/meta-options/meta-option.entity';
 import { TagsService } from 'src/tags/providers/tags.service';
 import { PatchPostDto } from '../dtos/patch-post.dto';
+import { Tag } from 'src/tags/tag.entity';
 
 @Injectable()
 export class PostsService {
@@ -54,14 +59,30 @@ export class PostsService {
   }
 
   public async update(patchPostDto: PatchPostDto) {
-    // Find the Tags
-    let tags = await this.tagsService.findMultipleTags(patchPostDto.tags || []);
+    let tags: Tag[] = [];
+    let post: Post | null = null;
 
-    // Find the Post
-    let post = await this.postsRepository.findOneBy({ id: patchPostDto.id });
+    try {
+      // Find the Tags
+      tags = await this.tagsService.findMultipleTags(patchPostDto.tags || []);
+    } catch (error) {
+      throw new RequestTimeoutException(' Unable to process your request');
+    }
+
+    // Number of tags need to be equal
+    if (!tags || tags.length !== patchPostDto.tags?.length) {
+      throw new BadRequestException(' Please check your tag ids');
+    }
+
+    try {
+      // Find the Post
+      post = await this.postsRepository.findOneBy({ id: patchPostDto.id });
+    } catch (error) {
+      throw new RequestTimeoutException(' Unable to process your request');
+    }
 
     if (!post) {
-      throw new Error('Post not found');
+      throw new BadRequestException('Post not found');
     }
 
     // update the properties of the Post
@@ -77,8 +98,13 @@ export class PostsService {
     // Assign the new tags
     post.tags = tags;
 
-    // Save the post and return
-    return await this.postsRepository.save(post);
+    try {
+      await this.postsRepository.save(post);
+    } catch (error) {
+      throw new RequestTimeoutException(' Unable to process your request');
+    }
+
+    return post;
   }
 
   public async delete(id: number) {
