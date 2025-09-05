@@ -1,8 +1,12 @@
-import { Injectable } from '@nestjs/common';
-import { CreateUserDto } from '../dtos/create-user.dto';
+import {
+  ConflictException,
+  Injectable,
+  RequestTimeoutException,
+} from '@nestjs/common';
 import { User } from '../user.entity';
 import { DataSource } from 'typeorm';
 import { CreateManyUsersDto } from '../dtos/create-many-users.dto';
+import { stringify } from 'querystring';
 
 @Injectable()
 export class UsersCreateManyProvider {
@@ -13,11 +17,16 @@ export class UsersCreateManyProvider {
 
     // Create Query Runner Instance
     const queryRunner = this.dataSource.createQueryRunner();
-    // Connect Query Runner to datasource
-    await queryRunner.connect();
 
-    // Start Transaction
-    await queryRunner.startTransaction();
+    try {
+      // Connect Query Runner to datasource
+      await queryRunner.connect();
+
+      // Start Transaction
+      await queryRunner.startTransaction();
+    } catch (error) {
+      throw new RequestTimeoutException('Could not connect to the database');
+    }
 
     try {
       for (let user of createManyUsersDto.users) {
@@ -31,9 +40,23 @@ export class UsersCreateManyProvider {
     } catch (error) {
       // If Unsuccessful, rollback transaction
       await queryRunner.rollbackTransaction();
+
+      throw new ConflictException('Could not complete the transaction', {
+        description: stringify(error),
+      });
     } finally {
-      // Release Connection
-      await queryRunner.release();
+      // Extra - If need, We can just release QueryRunner inside finally without try catch nested in it
+      try {
+        // Release Connection
+        await queryRunner.release();
+      } catch (error) {
+        throw new RequestTimeoutException(
+          'Could not release the database connection',
+          {
+            description: stringify(error),
+          },
+        );
+      }
     }
 
     return newUsers;
