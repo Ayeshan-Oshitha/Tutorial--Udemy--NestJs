@@ -59,6 +59,11 @@ export class UsersController {
     return this.usersService.Create(createUserDto);
   }
 
+  @Post('create-many')
+  public createManyUsers(@Body() createUsersDto: CreateUserDto[]) {
+    return this.usersService.createMany(createUsersDto);
+  }
+
   @Patch()
   public patchUser(@Body() patchUserDto: PatchUserDto) {
     return patchUserDto;
