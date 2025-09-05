@@ -17,6 +17,7 @@ import type { ConfigType } from '@nestjs/config';
 import profileConfig from '../config/profile.config';
 import { error } from 'console';
 import { UsersCreateManyProvider } from './users-create-many.provider';
+import { CreateManyUsersDto } from '../dtos/create-many-users.dto';
 
 /**
  * Class to connect users table and perform business operations
@@ -143,7 +144,7 @@ export class UsersService {
     return newUser;
   }
 
-  public async createMany(createUsersDto: CreateUserDto[]) {
-    return await this.usersCreateManyProvider.createMany(createUsersDto);
+  public async createMany(createManyUsersDto: CreateManyUsersDto) {
+    return await this.usersCreateManyProvider.createMany(createManyUsersDto);
   }
 }
