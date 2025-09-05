@@ -10,6 +10,9 @@ async function bootstrap() {
       whitelist: true, // remove properties that are not in the DTO
       forbidNonWhitelisted: true, // throw an error if a property is not in the DTO
       transform: true, // automatically transform payloads to DTO instances
+      transformOptions: {
+        enableImplicitConversion: true, // allow implicit conversion of primitive types
+      },
     }),
   );
 
