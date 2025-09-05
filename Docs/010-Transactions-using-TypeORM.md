@@ -23,3 +23,13 @@ This might not be a perfect example, but it can be used as an illustration in ou
 A connection pool is a collection of reusable connections, with a maximum number of connections that can exist in the database. QueryRunner gives a single connection from this pool. While performing transactions, we do not use multiple connections with the database—just a single connection.
 
 <img src="./images/images-09/image-5.png" width="800">
+
+# Why Create a post is Not a Transaction
+
+<img src="./images/images-09/image-6.png" width="550">
+
+Creating a single post involves only one database operation: the .save() method. Since there is only one point of failure, adding a single exception handling for this operation is sufficient. There is no need for additional rollback handling. Any other queries, such as fetch operations, are not directly related to creating the post and do not impact this process.
+
+Transactions are more useful when performing multiple related operations that must all succeed or fail together. For example, creating multiple users in a single process requires several database operations. Without a transaction, we would need to add exception handling for each operation individually, which is inefficient and error-prone.
+
+In a transaction, operations could be related to one particular entity or many entities.
