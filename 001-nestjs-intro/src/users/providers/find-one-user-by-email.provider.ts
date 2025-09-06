@@ -28,10 +28,6 @@ export class FindOneUserByEmailProvider {
       });
     }
 
-    if (!user) {
-      return new UnauthorizedException('User with this email does not exist');
-    }
-
     return user;
   }
 }
