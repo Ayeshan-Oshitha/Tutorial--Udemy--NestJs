@@ -18,6 +18,7 @@ import profileConfig from '../config/profile.config';
 import { error } from 'console';
 import { UsersCreateManyProvider } from './users-create-many.provider';
 import { CreateManyUsersDto } from '../dtos/create-many-users.dto';
+import { CreateUserProvider } from './create-user.provider';
 
 /**
  * Class to connect users table and perform business operations
@@ -39,6 +40,9 @@ export class UsersService {
 
     // Inject CreateManyUsers Provider
     private readonly usersCreateManyProvider: UsersCreateManyProvider,
+
+    //  Inject create user provider
+    private readonly createUserProvider: CreateUserProvider,
   ) {}
 
   /**
@@ -49,34 +53,7 @@ export class UsersService {
     limit: number,
     page: number,
   ) {
-    // mimic error - API Endpoint is moved permanantely
-    throw new HttpException(
-      {
-        status: HttpStatus.MOVED_PERMANENTLY,
-        error: 'This endpoint has been moved permanantely to new location',
-        fileName: 'users.service.ts',
-        lineNumber: 54,
-      },
-      HttpStatus.MOVED_PERMANENTLY,
-      {
-        description: ' Occured because API Endpoint Permentely Mopved',
-      },
-    );
-
-    return [
-      {
-        id: 1,
-        firstName: 'John',
-        lastName: 'Doe',
-        email: 'john@gmail.com',
-      },
-      {
-        id: 2,
-        firstName: 'Jane',
-        lastName: 'Doe',
-        email: 'jane@gmail.com',
-      },
-    ];
+    return this.usersRepository.find();
   }
 
   /**
@@ -107,41 +84,7 @@ export class UsersService {
    * Create a new user
    */
   public async Create(createUserDto: CreateUserDto) {
-    let existingUser: User | null = null;
-
-    try {
-      existingUser = await this.usersRepository.findOne({
-        where: { email: createUserDto.email },
-      });
-    } catch (error) {
-      // Might save the details of exception
-      // Information which is sensitive
-      throw new RequestTimeoutException(
-        'Unable to process your request at the moment, please try again later',
-        {
-          description: 'Database connection error',
-        },
-      );
-    }
-
-    if (existingUser) {
-      throw new BadRequestException('User with this email already exists');
-    }
-
-    let newUser = this.usersRepository.create(createUserDto);
-
-    try {
-      newUser = await this.usersRepository.save(newUser);
-    } catch (error) {
-      throw new RequestTimeoutException(
-        'Unable to process your request at the moment, please try again later',
-        {
-          description: 'Database connection error',
-        },
-      );
-    }
-
-    return newUser;
+    return await this.createUserProvider.Create(createUserDto);
   }
 
   public async createMany(createManyUsersDto: CreateManyUsersDto) {

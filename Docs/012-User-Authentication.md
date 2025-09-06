@@ -47,3 +47,11 @@ Bcrypt is a popular hashing algorithm. It **stores all necessary information** i
 This allows bcrypt to **verify passwords without storing the salt separately.**
 
 <img src="./images/images-11/image-8.png" width="600">
+
+# User Signup
+
+When we reference **abstract classes** in a module file, we use a slightly different approach: we pass an **object** and specify what is being **provided** and what is the **concrete implementation**.
+
+This is helpful because later, if we need to **change the implementation**, we only have to change it in **one place**, without updating all the places where the abstract class is used.
+
+`npx nest g pr /users/providers/create-user.provider --flat --no-spec` - Create provider using terminal
