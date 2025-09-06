@@ -11,3 +11,7 @@ Guards can be used with a controller class as well as a controller method. They 
 ---
 
 <img src="./images/images-12/image-3.png" width="700">
+
+# Creating AccessToken Guard
+
+Every guard should implement the `canActivate` method.
