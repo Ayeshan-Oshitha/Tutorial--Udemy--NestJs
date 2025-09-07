@@ -62,3 +62,25 @@ But it can sometimes confuse developers. To avoid this confusion, it’s better 
 
 Extra - When you use `@UseGuards()` on a controller or route, NestJS tries to instantiate that guard **within the module of the controller**, so all of the guard’s dependencies must be available in that module.
 Even if the guard is already registered globally in `AppModule`, using `@UseGuards()` locally forces Nest to create a new instance in the controller’s module, and if the dependencies aren’t imported there ( in that particular module), it will fail.
+
+# What are Decorators
+
+<img src="./images/images-12/image-4.png" width="700">
+
+Like a TypeScript decorator, a NestJS decorator can be created for a **class, a method, or a parameter of a method**. These are TypeScript decorators, but in NestJS, they have a slightly different purpose: **metadata**.
+
+<img src="./images/images-12/image-5.png" width="700">
+
+NestJS also provides **special decorators** that allow us to define custom metadata if we want to attach information to the execution context.
+
+For example, we can set `isPublic` to `true` on a route. Then, in a guard, we can check this metadata and allow the request to pass without performing authentication or validation if it’s public.
+
+So, **metadata can be used as a flag** for any other component in NestJS.
+
+<img src="./images/images-12/image-6.png" width="700">
+
+When we want to access this metadata, we use the **Reflector** class. Metadata can be accessed inside **middleware, guards, interceptors, and pipes**.
+
+It is available in the **global execution context**, so it can be read by any component in the NestJS request lifecycle.
+
+<img src="./images/images-12/image-7.png" width="700">
