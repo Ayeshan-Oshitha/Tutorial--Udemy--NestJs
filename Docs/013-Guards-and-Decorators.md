@@ -84,3 +84,20 @@ When we want to access this metadata, we use the **Reflector** class. Metadata c
 It is available in the **global execution context**, so it can be read by any component in the NestJS request lifecycle.
 
 <img src="./images/images-12/image-7.png" width="700">
+
+# Our First Decorator
+
+In NestJS, there are two main ways to use custom decorators:
+
+#### 1. Using the Built-in `@SetMetadata` Decorator
+
+```typescript
+@Post()
+@SetMetadata('authType', 'none')
+```
+
+#### 2. Creating and Using a Custom Decorator
+
+```typescript
+@Auth(AuthType.None)
+```

@@ -9,6 +9,7 @@ import {
   Patch,
   Post,
   Query,
+  SetMetadata,
   UseGuards,
   ValidationPipe,
 } from '@nestjs/common';
@@ -19,6 +20,8 @@ import { UsersService } from './providers/users.service';
 import { ApiOperation, ApiQuery, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { CreateManyUsersDto } from './dtos/create-many-users.dto';
 import { AccessTokenGuard } from 'src/auth/guards/access-token/access-token.guard';
+import { AuthType } from 'src/auth/enums/auth-type.enum';
+import { Auth } from 'src/auth/decorators/auth.decorator';
 
 @Controller('users')
 @ApiTags('Users')
@@ -26,6 +29,7 @@ export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
   @Get('{/:id}')
+  @Auth(AuthType.None)
   @ApiOperation({
     summary: 'Fetches a list of registered users on the application',
     description:
@@ -58,6 +62,8 @@ export class UsersController {
   }
 
   @Post()
+  // @SetMetadata('authType', 'None')
+  @Auth(AuthType.None)
   public createUser(@Body() createUserDto: CreateUserDto) {
     return this.usersService.Create(createUserDto);
   }
