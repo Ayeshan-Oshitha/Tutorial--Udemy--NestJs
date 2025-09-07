@@ -123,3 +123,9 @@ The **Authentication Guard** will depend on the **Auth decorator**, which allows
 Each strategy will depend on its specific dependency. For example, the `Bearer` strategy depends on the **AccessTokenGuard.**
 
 In the future, we can add another strategy, such as **Google Auth**, and create a dependency that can be used in the same way.
+
+# Create Active User
+
+<img src="./images/images-12/image-11.png" width="500">
+
+<img src="./images/images-12/image-12.png" width="500">
