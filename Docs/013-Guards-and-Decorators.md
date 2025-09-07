@@ -101,3 +101,25 @@ In NestJS, there are two main ways to use custom decorators:
 ```typescript
 @Auth(AuthType.None)
 ```
+
+# Authentication Guard Strategy
+
+<img src="./images/images-12/image-8.png" width="700">
+
+---
+
+<img src="./images/images-12/image-9.png" width="700">
+
+Now, our main guard will be the **Authentication Guard**, because we want to allow both **protected routes and public routes**.
+
+So, we use the **Authentication Guard** as the main guard and only import the _AccessTokenGuard_, since it is a dependency of the Authentication Guard.
+
+---
+
+<img src="./images/images-12/image-10.png" width="700">
+
+The **Authentication Guard** will depend on the **Auth decorator**, which allows a few strategies, like `None` or `Bearer`.
+
+Each strategy will depend on its specific dependency. For example, the `Bearer` strategy depends on the **AccessTokenGuard.**
+
+In the future, we can add another strategy, such as **Google Auth**, and create a dependency that can be used in the same way.
