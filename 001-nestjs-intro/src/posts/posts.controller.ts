@@ -16,6 +16,7 @@ import { CreatePostDto } from './dtos/create-post.dto';
 import { PatchPostDto } from './dtos/patch-post.dto';
 import { GetPostsDto } from './dtos/get-posts.dto';
 import { ActiveUser } from 'src/auth/decorators/active-user.decorator';
+import type { ActiveUserData } from 'src/auth/interfaces/active-user-data.interface';
 
 @Controller('posts')
 @ApiTags('Posts')
@@ -40,9 +41,9 @@ export class PostsController {
   })
   public createPost(
     @Body() createPostSto: CreatePostDto,
-    @ActiveUser('email') email: string,
+    @ActiveUser() user: ActiveUserData,
   ) {
-    return this.postsService.create(createPostSto);
+    return this.postsService.create(createPostSto, user);
   }
 
   @Patch()

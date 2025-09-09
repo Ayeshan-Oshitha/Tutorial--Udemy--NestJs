@@ -127,13 +127,4 @@ export class CreatePostDto {
   @ValidateNested({ each: true }) // Validate each item in the array
   @Type(() => CreatePostMetaOptionsDto) // Use class-transformer to handle nested objects
   metaOptions?: CreatePostMetaOptionsDto;
-
-  @ApiProperty({
-    type: 'integer',
-    required: true,
-    example: 1,
-  })
-  @IsNotEmpty()
-  @IsInt()
-  authorId: number;
 }
