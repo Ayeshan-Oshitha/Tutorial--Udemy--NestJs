@@ -13,3 +13,11 @@ When a user signs in, both an **access token** and a **refresh token** should be
 In the frontend application, developers usually track when the access token was issued. As soon as the access token is about to expire, without letting the user know, the frontend silently sends a request to the server to generate a new set of tokens (both refresh and access tokens).
 
 To generate a new set of tokens, the server only needs the refresh token. The server validates the refresh token and issues a new access token (and optionally a new refresh token).
+
+# Create Refresh Token Endpoint
+
+In this code, a request can be validated using both the refresh token and the access token. However, this is considered **bad practice**.
+
+When coding, always use **two different secrets** when creating the refresh token and the access token. This ensures that a refresh token cannot be used as an access token.
+
+When validating with the correct secrets, a refresh token will fail if it is mistakenly used as an access token. This separation improves security and prevents refresh tokens from being misused for authorization.
