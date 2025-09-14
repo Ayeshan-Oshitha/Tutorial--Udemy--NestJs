@@ -41,6 +41,10 @@ export class SignInProvider {
       throw new UnauthorizedException('Email is not registered');
     }
 
+    if (!user.password) {
+      throw new UnauthorizedException('No Password');
+    }
+
     // If user found, compare the password
     let isPasswordValid: boolean = false;
 

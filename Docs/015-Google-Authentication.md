@@ -18,3 +18,9 @@ After validation, we check whether the user already exists in our database:
 - If the user already exists, we use the existing user.
 
 In either case, we generate our own tokens for the user to use within our application.
+
+# Setting the Configuration
+
+In order to use Google Authentication, we should install google-auth-library.
+
+`npm i google-auth-library`
