@@ -40,31 +40,43 @@ export class GoogleAuthenticationService implements OnModuleInit {
   }
 
   public async authentication(googleTokenDto: GoogleTokenDto) {
-    //  verify the Google Token sent by user
-    const loginTicket = await this.oauthClient.verifyIdToken({
-      idToken: googleTokenDto.token,
-    });
+    try {
+      //  verify the Google Token sent by user
+      const loginTicket = await this.oauthClient.verifyIdToken({
+        idToken: googleTokenDto.token,
+      });
 
-    //  Extract the payload from Google JWT
-    const payload = loginTicket.getPayload();
+      //  Extract the payload from Google JWT
+      const payload = loginTicket.getPayload();
 
-    if (!payload) {
-      return new UnauthorizedException('Invalid Google Token');
+      if (!payload) {
+        return new UnauthorizedException('Invalid Google Token');
+      }
+
+      const email = payload.email!;
+      const googleId = payload.sub;
+      const firstName = payload.given_name!;
+      const lastName = payload.family_name;
+
+      //  Find the user in the database using the GoogleId
+      const user = await this.usersService.findOneByGoogleId(googleId);
+
+      //  If the googleId exists in the database, generate tokens
+      if (user) {
+        return this.generateTokensProvider.generateTokens(user);
+      }
+      //  If the googleId does not exist, create a new user and generate tokens
+      const newUser = await this.usersService.createGoogleUser({
+        email: email,
+        firstName: firstName,
+        lastName: lastName,
+        googleId: googleId,
+      });
+
+      return this.generateTokensProvider.generateTokens(newUser);
+    } catch (error) {
+      //  If any of above steps failed, throw Unauthorized exception
+      throw new UnauthorizedException('Invalid Google Token');
     }
-
-    const email = payload.email;
-    const googleId = payload.sub;
-    const firstName = payload.given_name;
-    const lastName = payload.family_name;
-
-    //  Find the user in the database using the GoogleId
-    const user = await this.usersService.findOneByGoogleId(googleId);
-
-    //  If the googleId exists in the database, generate tokens
-    if (user) {
-      return this.generateTokensProvider.generateTokens(user);
-    }
-    //  If the googleId does not exist, create a new user and generate tokens
-    //  If any of above steps failed, throw Unauthorized exception
   }
 }
