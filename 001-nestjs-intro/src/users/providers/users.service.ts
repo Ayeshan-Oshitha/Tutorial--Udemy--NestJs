@@ -1,8 +1,6 @@
 import {
   BadRequestException,
   forwardRef,
-  HttpException,
-  HttpStatus,
   Inject,
   Injectable,
   RequestTimeoutException,
@@ -15,7 +13,6 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { CreateUserDto } from '../dtos/create-user.dto';
 import type { ConfigType } from '@nestjs/config';
 import profileConfig from '../config/profile.config';
-import { error } from 'console';
 import { UsersCreateManyProvider } from './users-create-many.provider';
 import { CreateManyUsersDto } from '../dtos/create-many-users.dto';
 import { CreateUserProvider } from './create-user.provider';
