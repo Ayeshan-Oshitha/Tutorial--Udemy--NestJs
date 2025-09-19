@@ -54,6 +54,8 @@ export class GoogleAuthenticationService implements OnModuleInit {
 
     const email = payload.email;
     const googleId = payload.sub;
+    const firstName = payload.given_name;
+    const lastName = payload.family_name;
 
     //  Find the user in the database using the GoogleId
     const user = await this.usersService.findOneByGoogleId(googleId);
