@@ -1,51 +1,12 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-import { ValidationPipe } from '@nestjs/common';
-import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
-import { DataResponseInterceptor } from './common/interceptors/data-response/data-response.interceptor';
-import { config } from 'aws-sdk';
-import { ConfigService } from '@nestjs/config';
+import { appCreate } from './app.create';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  app.useGlobalPipes(
-    new ValidationPipe({
-      whitelist: true, // remove properties that are not in the DTO
-      forbidNonWhitelisted: true, // throw an error if a property is not in the DTO
-      transform: true, // automatically transform payloads to DTO instances
-      transformOptions: {
-        enableImplicitConversion: true, // allow implicit conversion of primitive types
-      },
-    }),
-  );
 
-  /**
-   * Swagger configuration
-   */
-  const swaggerConfig = new DocumentBuilder()
-    .setVersion('1.0')
-    .setTitle('Blog App api')
-    .setDescription('Use the base API URL as http://localhost:3000')
-    .setTermsOfService('https://example.com/terms')
-    .setLicense('MIT', 'https://example.com/license')
-    .addServer('http://localhost:3000', 'Development server')
-    .build();
-  // Instantiate Document
-  const document = SwaggerModule.createDocument(app, swaggerConfig);
-  SwaggerModule.setup('api', app, document);
-
-  // Setup the aws sdk used uploading the files to aws s3 bucket
-  const configService = app.get(ConfigService);
-  config.update({
-    credentials: {
-      accessKeyId: configService.get('appConfig.awsAccessKeyId')!,
-      secretAccessKey: configService.get('appConfig.awsSecretAccessKey')!,
-    },
-    region: configService.get('appConfig.awsRegion')!,
-  });
-
-  //enable cors
-  app.enableCors();
+  // Add middleware
+  appCreate(app);
 
   await app.listen(process.env.PORT ?? 3000);
 }
