@@ -78,13 +78,6 @@ export class CreatePostDto {
   @IsOptional()
   publishOn?: Date;
 
-  @ApiPropertyOptional()
-  @IsArray()
-  @IsOptional()
-  @IsString({ each: true })
-  @MinLength(3, { each: true })
-  tags?: string[];
-
   @ApiPropertyOptional({
     type: 'array',
     required: false,
@@ -110,4 +103,11 @@ export class CreatePostDto {
   @IsString()
   @IsNotEmpty()
   author: string;
+
+  @ApiPropertyOptional()
+  @IsArray()
+  @IsOptional()
+  @IsString({ each: true })
+  @MinLength(3, { each: true })
+  tags?: string[];
 }
