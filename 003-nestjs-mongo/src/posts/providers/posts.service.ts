@@ -22,20 +22,11 @@ export class PostsService {
     return await newPost.save();
   }
 
-  public findAll(userId: string) {
-    const user = this.usersService.findOneById(userId);
-
-    return [
-      {
-        user: user,
-        title: 'Test Tile',
-        content: 'Test Content',
-      },
-      {
-        user: user,
-        title: 'Test Tile 2',
-        content: 'Test Content 2',
-      },
-    ];
+  public async findAll() {
+    return await this.postModel
+      .find()
+      .populate('tags')
+      .populate('author')
+      .exec();
   }
 }
