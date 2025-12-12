@@ -3,6 +3,8 @@ import { AppModule } from './app.module';
 import { ValidationPipe } from '@nestjs/common';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { DataResponseInterceptor } from './common/interceptors/data-response/data-response.interceptor';
+import { config } from 'aws-sdk';
+import { ConfigService } from '@nestjs/config';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -20,7 +22,7 @@ async function bootstrap() {
   /**
    * Swagger configuration
    */
-  const config = new DocumentBuilder()
+  const swaggerConfig = new DocumentBuilder()
     .setVersion('1.0')
     .setTitle('Blog App api')
     .setDescription('Use the base API URL as http://localhost:3000')
@@ -29,8 +31,18 @@ async function bootstrap() {
     .addServer('http://localhost:3000', 'Development server')
     .build();
   // Instantiate Document
-  const document = SwaggerModule.createDocument(app, config);
+  const document = SwaggerModule.createDocument(app, swaggerConfig);
   SwaggerModule.setup('api', app, document);
+
+  // Setup the aws sdk used uploading the files to aws s3 bucket
+  const configService = app.get(ConfigService);
+  config.update({
+    credentials: {
+      accessKeyId: configService.get('appConfig.awsAccessKeyId')!,
+      secretAccessKey: configService.get('appConfig.awsSecretAccessKey')!,
+    },
+    region: configService.get('appConfig.awsRegion')!,
+  });
 
   //enable cors
   app.enableCors();
