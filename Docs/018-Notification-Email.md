@@ -7,3 +7,5 @@ Additionally, we use the **NestJS Mailer** module, which internally relies on No
 **Required Packages**
 
 `npm i @nestjs-modules/mailer@2.0.2 nodemailer@6.9.13 ejs@3.1.10`
+
+Note - The `@Global()` decorator in a module makes it publicly available, meaning its providers can be used in other modules without importing it explicitly.
