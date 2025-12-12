@@ -5,6 +5,7 @@ import { HashingProvider } from 'src/auth/providers/hashing.provider';
 import { DataSource, ObjectLiteral, Repository } from 'typeorm';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { User } from '../user.entity';
+import { first } from 'rxjs';
 
 type MockRepository<T extends ObjectLiteral = any> = Partial<
   Record<keyof Repository<T>, jest.Mock>
@@ -21,13 +22,25 @@ const createMockRepository = <
 describe('CreateUserProvider', () => {
   let provider: CreateUserProvider;
   let usersRepository: MockRepository<User>;
+  const user = {
+    firstName: 'John',
+    lastName: 'Doe',
+    email: 'John@gmail.com',
+    password: 'hashedPassword',
+  };
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [
         CreateUserProvider,
-        { provide: MailService, useValue: {} },
-        { provide: HashingProvider, useValue: {} },
+        {
+          provide: MailService,
+          useValue: { sendUserWelcome: jest.fn(() => Promise.resolve()) },
+        },
+        {
+          provide: HashingProvider,
+          useValue: { hashPassword: jest.fn(() => user.password) },
+        },
         { provide: DataSource, useValue: {} },
         { provide: getRepositoryToken(User), useValue: createMockRepository() },
       ],
