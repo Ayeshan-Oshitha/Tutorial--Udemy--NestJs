@@ -13,7 +13,7 @@ import { UsersModule } from './users/users.module';
     AuthModule,
     MongooseModule.forRoot(
       'mongodb+srv://nestjs:4kRbli2h2k5F50tb@nestjs.dgq4bvd.mongodb.net/?retryWrites=true&w=majority&appName=nestjs',
-      { dbName: 'nestjs-blog' },
+      { dbName: 'nestjs-blog-collection' },
     ),
   ],
   controllers: [AppController],
