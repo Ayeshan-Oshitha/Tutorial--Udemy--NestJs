@@ -5,6 +5,7 @@ import { dropDatabase } from 'test/helpers/drop-database.helper';
 import { bootstrapNestApplication } from 'test/helpers/boostrap-nest-application';
 import request from 'supertest';
 import {
+  completeUser,
   missingEmail,
   missingfirstName,
   missingPassword,
@@ -48,7 +49,36 @@ describe('[Users] @Post Endpoints', () => {
     return request(httpServer).post('/users').send(missingPassword).expect(400);
   });
 
-  it.todo('/users - Valid request successfully creates user');
-  it.todo('/users - password is not returned in the response');
-  it.todo('/users - googleId is not returned in the response');
+  it('/users - Valid request successfully creates user', () => {
+    return request(httpServer)
+      .post('/users')
+      .send(completeUser)
+      .expect(201)
+      .then(({ body }) => {
+        expect(body.data).toBeDefined();
+        expect(body.data.firstName).toBe(completeUser.firstName);
+        expect(body.data.lastName).toBe(completeUser.lastName);
+        expect(body.data.email).toBe(completeUser.email);
+      });
+  });
+
+  it('/users - password is not returned in the response', () => {
+    return request(httpServer)
+      .post('/users')
+      .send(completeUser)
+      .expect(201)
+      .then(({ body }) => {
+        expect(body.data.password).toBeUndefined();
+      });
+  });
+
+  it('/users - googleId is not returned in the response', () => {
+    return request(httpServer)
+      .post('/users')
+      .send(completeUser)
+      .expect(201)
+      .then(({ body }) => {
+        expect(body.data.password).toBeUndefined();
+      });
+  });
 });
