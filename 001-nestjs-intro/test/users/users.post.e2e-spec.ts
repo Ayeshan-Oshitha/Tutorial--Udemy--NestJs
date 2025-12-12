@@ -25,16 +25,10 @@ describe('[Users] @Post Endpoints', () => {
   });
 
   it('/users - Endpoint is public', () => {
-    return request(httpServer)
-      .post('/users')
-      .send({})
-      .expect(400)
-      .then(({ body }) => {
-        console.log(body);
-      });
+    return request(httpServer).post('/users').send({}).expect(400);
   });
 
-  it.todo('/users - firstName is mandatory');
+  it('/users - firstName is mandatory', () => {});
   it.todo('/users - email is mandatory');
   it.todo('/users - password is mandatory');
   it.todo('/users - Valid request successfully creates user');

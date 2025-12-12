@@ -5,3 +5,7 @@ End-to-end tests include the test database as well, whereas unit tests **do not*
 For end-to-end testing, we use Jest along with another library called **supertest**.
 
 Unit tests are usually placed inside the src directory, while end-to-end tests are placed inside the test directory.
+
+# Introduction To Faker
+
+Faker.js helps generate fake data.
