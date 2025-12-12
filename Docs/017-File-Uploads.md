@@ -5,3 +5,5 @@
 `npm i aws-sdk`
 
 `npm i -D @types/multer`
+
+Here we used S3 bucket and Cloudfront
