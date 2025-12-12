@@ -26,7 +26,9 @@ import { strict } from 'assert';
         },
         template: {
           dir: join(__dirname, 'templates'),
-          adapter: new EjsAdapter(),
+          adapter: new EjsAdapter({
+            inlineCssEnabled: true,
+          }),
           options: {
             strict: false,
           },
