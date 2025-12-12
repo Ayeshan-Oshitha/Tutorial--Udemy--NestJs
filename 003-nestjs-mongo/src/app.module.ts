@@ -5,6 +5,7 @@ import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { PostsModule } from './posts/posts.module';
 import { UsersModule } from './users/users.module';
+import { TagsModule } from './tags/tags.module';
 
 @Module({
   imports: [
@@ -15,6 +16,7 @@ import { UsersModule } from './users/users.module';
       'mongodb+srv://nestjs:4h2k5FDUMMYTEXTtb@nestjs.dgq4bvd.mongodb.net/?retryWrites=true&w=majority&appName=nestjs',
       { dbName: 'nestjs-blog-collection' },
     ),
+    TagsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
