@@ -30,14 +30,14 @@ export class UsersService {
    * Injecting Services & Repositories
    */
   constructor(
-    @Inject(forwardRef(() => AuthService))
-    private readonly authService: AuthService,
+    // @Inject(forwardRef(() => AuthService))
+    // private readonly authService: AuthService,
 
     @InjectRepository(User)
     private usersRepository: Repository<User>,
 
-    @Inject(profileConfig.KEY)
-    private readonly profileConfiguration: ConfigType<typeof profileConfig>,
+    // @Inject(profileConfig.KEY)
+    // private readonly profileConfiguration: ConfigType<typeof profileConfig>,
 
     // Inject CreateManyUsers Provider
     private readonly usersCreateManyProvider: UsersCreateManyProvider,
